@@ -18,12 +18,12 @@ import random
 ALLOWED_FROM = ["7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6"]
 ALLOWED_TO = ["7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6"]
 
-os.environ['OPENAI_API_KEY'] = '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'
+os.environ['OPENAI_API_KEY'] = 'your_key'
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 empty_thread = openai.beta.threads.create()
 thread_id = empty_thread.id
-asst_id = 'asst_X8eIdU1yFT7zaazQFdQLMIwE'
+asst_id = 'your_assist'
 
 
 # filename='conversation_history.json'
