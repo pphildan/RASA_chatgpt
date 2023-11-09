@@ -1,0 +1,35 @@
+version: "3.1"
+
+rules:
+
+
+# - rule: Activate form
+#   steps:
+#   - intent: room_booking_intent
+#   - action: utter_confirm_possibility
+#   - action: booking_form
+#   - active_loop: booking_form
+- rule: chat with ChatGPT
+  steps:
+  - intent: chat_with_gpt
+  - action: action_chat_with_gpt
+
+
+- rule: Submit form
+  condition:
+    - active_loop: booking_form
+  steps:
+    - action: booking_form
+    - active_loop: null
+    - action: action_confirm
+
+
+- rule: stop booking
+  condition:
+    - active_loop: booking_form
+  steps:
+  - intent: stop_booking_form
+  - action: action_reset_slots
+    
+
+

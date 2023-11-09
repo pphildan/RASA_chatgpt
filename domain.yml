@@ -1,0 +1,159 @@
+version: '3.1'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- affirm
+- ask_me_anything
+- backdoor
+- bot_challenge
+- greet
+- inform
+- inform_name
+- repeat_name
+- room_booking_intent
+- stop_booking_form
+- tell_more
+- thanks
+- chat_with_gpt
+entities:
+- name
+- from
+- to
+
+slots:
+  from:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: from
+  to:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: to
+
+  available:
+    type: bool
+    initial_value: false
+    influence_conversation: false  
+    mappings:
+    - type: custom
+  name:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: name
+
+forms:
+  booking_form:
+    required_slots:
+    - from
+    - to
+    - available
+    - name
+responses:
+  utter_greet:
+  - text: Hey! How can I help you?
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_ask_shirt_size:
+  - text: What is your shirt size?
+  utter_remember:
+  - text: Thanks. I'll remember that.
+  utter_confirm_possibility:
+  - text: You can book one of our group rooms today for 2 hours between 7am and 6 pm.
+  - text: You can make a reservation for one of our group rooms today for 2 hours between 7am and 6 pm.
+  - text: You have the option to reserve one of our group rooms for a 2-hour duration today, anytime between 7 am and 6 pm.
+  - text: Today, you are able to secure a 2-hour booking for one of our group rooms, available from 7 am to 6 pm.
+  - text: A 2-hour time slot in one of our group rooms is available for booking today, between the hours of 7 am and 6 pm.
+  - text: You are eligible to book a 2-hour session in one of our group rooms today, with availability ranging from 7 am to 6 pm.
+  - text: Today, it's possible for you to book a group room for a 2-hour slot between 7 am and 6 pm.
+  utter_confirm_time:
+  - text: Great we have a room from {from} to {to}.
+  utter_ask_from:
+  - text: Which time slot do you want to request?
+  - text: Which time slot do you want to book?
+  - text: Please let us know your preferred time slot.
+  - text: Could you please specify your desired time slot?
+  - text: Which time period would you like to reserve?
+  - text: What time slot suits you best?
+  - text: Can you please indicate your preferred time?
+  utter_ask_name:
+  - text: To confirm, may I have your name, please?
+  - text: For booking confirmation, your name, please?
+  - text: Could you provide your name to confirm the booking?
+  - text: Just need your name to confirm. Could you share it?
+  - text: Your name for the confirmation, please?
+  - text: To secure your booking, can I get your name?
+  utter_backdoor:
+  - text: 42, but I'm still working on the question!
+  utter_confirm_all:
+  - text: Perfect, I booked a room from {from} to {to} for {name}.
+  utter_tell_infos:
+  - text: Nice, I can tell you a lot about SQAURE!
+  utter_tell_facts:
+  - text: The SQUARE building was designed by architect Sou Fujimoto and financed by the HSG Foundation.
+  - text: The SQUARE had a record construction time of two years, starting in November 2019 and completing in November 2021.
+  - text: SQUARE serves as a test environment for new teaching and learning formats, featuring a flexible space concept for experimental and cross-generational education.
+  - text: The project 'Open Grid - choices for tomorrow' by Sou Fujimoto is based on the architectural principle of the square, and the design integrates concepts of a station, monastery, and workshop.
+  - text: The total construction costs of SQUARE were CHF 53 million, with around 63% of the services provided by companies from the Eastern Switzerland region.
+  - text: The SQUARE building is designed like a large notebook, featuring flexible spaces and walls for testing and applying innovative teaching formats.
+  - text: The building's cube-like structure consists of a grid with blocks measuring 10x10x5 meters, partially featuring half room heights to provide more headspace and a harmonious silhouette.
+  - text: SQUARE's facade is made of transparent glass that changes visually with the seasons, offering a healthy climate with daylight and extensive views.
+  - text: The building houses unique sculptures and installations, including 'Through the forest of thorns,' a 60-meter long chain with 130 brass objects, and 'Ourea,' a 4.5-ton bronze sculpture by Sir Tony Cragg.
+  - text: Funded entirely by private donors, SQUARE had a total construction cost of CHF 53 million, with approximately 63% of the services provided by companies from the Eastern Switzerland region.
+  - text: The University of St. Gallen was originally founded as a trade academy in 1898 and was taken over by the canton in 1938.
+  - text: The new HSG building complex, constructed in the early 1960s, is considered a masterpiece of Brutalist architecture and is named 'La Tête'.
+  - text: The building's heating and cooling are entirely powered by heat pumps, utilizing 65 probes drilled about 200 meters deep, divided into two fields for optimal energy efficiency.
+  - text: To cover its energy needs, the university installed its own photovoltaic system with a capacity of 67 kW, which can meet 50-60% of the building's total energy requirement annually.
+  - text: A total of 6,000 m3 of concrete was used in the construction, including eco-friendly options like Holcim Evopact plus and Holcim Evopact ZERO, which reduce carbon emissions by 10%.
+  utter_please_rephrase:
+  - text: Could you rephrase?
+  - text: Can you repeat that?
+  utter_default:
+  - text: Sorry I didn't get that. Can you rephrase?
+  utter_stop_booking:
+  - text: All right, how else can I help?
+  utter_you_welcome:
+  - text: "You're welcome!"
+  - text: "You're welcome! If you have any more questions, feel free to ask."
+  - text: "No problem at all!"
+  - text: "Glad I could help!"
+  - text: "Anytime! Let me know if there's anything else I can do for you."
+  - text: "Happy to assist!"
+actions:
+- action_set_available
+- action_confirm_possibility
+- utter_confirm_possibility
+- action_reset_slots
+- utter_tell_facts
+- action_confirm
+- utter_greet
+- utter_stop_booking
+- utter_tell_infos
+- utter_goodbye
+- utter_confirm_time
+- action_two_stage_fallback
+- action_restart
+- utter_ask_shirt_size
+- utter_cheer_up
+- utter_did_that_help
+- utter_happy
+- utter_remember
+- utter_ask_from
+- utter_ask_name
+- utter_confirm_all
+- utter_please_rephrase
+- utter_default
+- validate_booking_form
+- action_chat_with_gpt

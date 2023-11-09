@@ -1,0 +1,397 @@
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+    - hi there
+
+
+
+- intent: room_booking_intent
+  examples: |
+    - I would like to book a room
+    - can I make a room reservation?
+    - room booking
+    - available room
+    - I need to reserve a room
+    - Is it possible to book a room?
+    - I'm looking to book a room for several nights
+    - Can you assist me in reserving a room?
+    - I'd like to make a room reservation
+    - How can I go about booking a room?
+    - Reserve a room for me, please
+    - I need a room reservation
+    - Can I secure a room booking?
+    - Book a room for my upcoming stay
+    - I want to reserve a hotel room
+    - Could you book a room for us?
+    - Help me book a room
+    - I'd like to arrange a room booking
+    - Is there a way to reserve a room online?
+    - Make a room reservation for me, please
+    - I'm interested in booking a room
+    - Can we book a room for our trip?
+    - I require assistance with room booking
+    - Show me the room booking process
+    - i want to book a room
+    - i want a room
+    - i want to book a room now
+- intent: inform
+  examples: |
+    - From [2](from) pm to [4](to) pm
+    - From [9](from) to [10](to)
+    - From [9:30](from) to [10:30](to)
+    - From [3](from) to [4](to)
+    - From [4](from) pm to [5:30](to) pm
+    - From [7:15](from) to [9:15](to)
+    - From [2](from) to [3:30](to)
+    - I need it between [3](from) and [4](to)
+    - Can I get a slot from [1](from) till [2:30](to)?
+    - I'm available [5:30](from) through [7](to)
+    - Booking a time slot from [11](from) until [12](to)
+    - I'd like to reserve [12](from) to [1](to)
+    - Schedule something from [6](from) up to [8](to)
+    - Need a booking from [10](from) to [11](to)
+    - Set a time from [2:30](from) to [4:30](to)
+    - I'm looking to book from [8](from) until [10](to)
+    - Reserving time from [3:30](from) to [5](to)
+    - I want to schedule from [4](from) to [6](to)
+    - Looking for a slot between [1:30](from) and [3:30](to)
+    - I wish to book a period from [9](from) to [11](to)
+    - Arrange a meeting from [8:30](from) till [10:30](to)
+    - I have time from [10:15](from) to [12:15](to)
+    - Prefer a slot from [1](from) to [3](to)
+    - Set aside time from [2](from) to [4:15](to)
+    - From [1](from) to [2:30](to)
+    - From [5:30](from) to [7](to)
+    - From [11](from) to [12](to)
+    - From [12](from) to [1](to)
+    - From [6](from) to [8](to)
+    - I can make it from [11:30](from) to [1:30](to)
+    - I'm free from [9:45](from) until [11:45](to)
+    - Would like to book from [3](from) to [5](to)
+    - I'd prefer from [2](from) till [4](to)
+    - Let's set a time from [1](from) to [2](to)
+    - Could we arrange from [4:30](from) to [6:30](to)?
+    - I want a booking between [10:30](from) and [12:30](to)
+    - Schedule me in from [3:15](from) to [5:15](to)
+    - Looking to reserve from [2:45](from) to [4:45](to)
+    - Please book from [11](from) to [1](to)
+    - from [8](from)am to [10](to) am
+    - from [2](from) to [3](to)am
+    - from [2](from) to [4](to)a.m
+    - from  [2](from) am to [3](to) am
+    - from [2](from) to [4](to)
+    - I am free between [8:00](from) a.m and [9:30](to) a.m.
+    - Schedule a meeting from [11:45](from) a.m to [1:15](to) p.m.
+    - My availability is from [3:30](from) p.m to [5:00](to) p.m.
+    - Block out time from [10](from) a.m to [11:30](to) a.m.
+    - I can meet from [2:45](from) p.m to [4:00](to) p.m.
+    - Reserve [9](from) to [10:15](to) in the morning.
+    - I'm open from [3](from) p.m until [5:45](to) p.m.
+    - Arrange a slot between [4:15](from) p.m and [6](to) p.m.
+    - My morning is free from [7:15](from) to [8:45](to).
+    - Let's set a time from [12:30](from) p.m to [2](to) p.m.
+
+- intent: inform_name
+  examples: |
+    - my name is [phil](name)
+    - [andreas](name)
+    - i'm [sepp](name)
+    - call me [maria](name)
+    - i am [sophie](name)
+    - the name's [james](name)
+    - they call me [ella](name)
+    - you can call me [max](name)
+    - it's [liam](name) here
+    - i go by [olivia](name)
+    - my friends call me [lucas](name)
+    - [charlotte](name) is my name
+    - please address me as [benjamin](name)
+    - [amelia](name) speaking
+    - [mason](name) is what you can call me
+    - i prefer to be called [mia](name)
+    - just [ethan](name), please
+    - i would like to introduce myself as [harper](name)
+    - name's [noah](name)
+    - [isabella](name) here
+    - i'm known as [jacob](name)
+    - it's [emily](name)
+    - they know me as [logan](name)
+    - i'm called [ava](name)
+    - say [daniel](name)
+    - i identify as [abigail](name)
+    - you might know me as [henry](name)
+    - it's me, [sophia](name)
+    - i'm [owen](name)
+    - [isla](name), that's me
+    - call me [jack](name)
+    - my name's [grace](name)
+    - [oliver](name) here
+    - but you can call me [chloe](name)
+    - i go by [matthew](name)
+    - they say I'm [lily](name)
+    - my name is [atilla](name)
+    - [Phil](name)
+    - my name is [Hannes](name)
+    - you can call me [yu](name)
+    - i'm [xin](name)
+    - they call me [nour](name)
+    - i am known as [zara](name)
+    - [taj](name) is what my friends call me
+    - i prefer the name [kai](name)
+    - my name is [mei](name)
+    - [rio](name), that's what they call me
+    - call me [Yu](name)
+    - i go by the name [luz](name)
+    - people know me as [nia](name)
+    - [knox](name) is the name
+    - [blaise](name), that's me
+    - i'm [cyrus](name)
+    - they say my name is [nova](name)
+    - my name is [lyra](name)
+    - i go by [jax](name)
+    - they know me as [lila](name)
+    - i prefer to be called [remy](name)
+    - just call me [zane](name)
+    - [kai](name) is my name
+    - my name's [mila](name)
+    - i'm [axel](name)
+    - call me [theo](name)
+    - [luna](name) is what you can call me
+    - [bodhi](name) here
+    - i go by [wren](name)
+    - my name is [kira](name)
+    - you can call me [yara](name)
+    - i prefer the name [teo](name)
+    - they call me [sia](name)
+    - my friends know me as [noe](name)
+    - i identify as [kaya](name)
+    - [zuri](name) is the name
+    - you might know me as [levi](name)
+    - my name is [nina](name)
+    - i am [mika](name)
+    - they call me [zola](name)
+    - just call me [lars](name)
+    - my name is [yael](name)
+    - i go by [xan](name)
+    - they know me as [tess](name)
+    - i'm [reid](name)
+    - call me [kian](name)
+    - [joss](name), that's me
+    - my name's [gwen](name)
+    - [frey](name) here
+    - but you can call me [dell](name)
+    - i go by [cato](name)
+    - they say I'm [bex](name)
+    - my name is [anouk](name)
+
+
+
+- intent: stop_booking_form
+  examples: |
+    - I don't want to book a room
+    - Oh no, I don't want to make any reservation
+    - Sorry, I don't want to book a room
+    - Cancel the booking process, please
+    - I've changed my mind about the reservation
+    - Actually, I don't need to book a room anymore
+    - Can we stop the room booking?
+    - I no longer wish to proceed with booking a room
+    - Hold on, I don't want to continue with the reservation
+    - Please stop, I don't want to book anything
+    - i dont want to book a room
+    - i dont want a room anymore
+    - i dont want to book a room anymore
+
+
+- intent: chat_with_gpt
+  examples: |
+    - What can you do?
+    - Where is the room?
+    - Which room did you reserve?
+    - whats the name of the room?
+    - how is the room called
+    - which room number
+    - Do you know something about the square?
+    - Tell me a joke.
+    - What's the weather like today?
+    - Can you recommend a good book?
+    - How do I get to the nearest train station?
+    - What are some good restaurants nearby?
+    - Can you help me with my homework?
+    - What's the latest news?
+    - How can I make a reservation?
+    - What are your operating hours?
+    - Do you have any tips for staying productive?
+    - Can you explain how blockchain works?
+    - What are the benefits of meditation?
+    - How do I fix a leaky faucet?
+    - Can you provide a recipe for chocolate cake?
+    - What movies are playing in theaters now?
+    - How can I improve my English skills?
+    - What are the symptoms of the common cold?
+    - Can you tell me a bedtime story?
+    - Can you tell me more about that?
+    - Oh nice, that's interesting!
+    - You're really funny.
+    - I didn't know that, thanks!
+    - That sounds amazing.
+    - Wow, I've never heard of that before.
+    - Can you explain that in more detail?
+    - That's so cool!
+    - I love learning new things.
+    - You have a lot of knowledge.
+    - This conversation is so engaging.
+    - I'm really enjoying our chat.
+    - How do you know so much?
+    - That's a great piece of advice.
+    - You've been very helpful.
+    - I'm glad I asked you.
+    - This is really helpful information.
+    - Thank you for explaining.
+    - That clears things up.
+    - You've got a great sense of humor.
+    - I appreciate your help.
+    - That was a great story.
+    - You make complex things seem simple.
+    - I never thought about it that way.
+    - That's a good point.
+    - You've given me a lot to think about.
+    - I learned something new today.
+    - You're a great conversationalist.
+    - I like how you think.
+    - You're very insightful.
+    - That was very enlightening.
+    - You have a way with words.
+    - I enjoy our conversations.
+    - Thanks for the recommendation.
+    - You're full of interesting facts.
+    - I love your stories.
+    - You always have the best advice.
+    - Thanks for being so helpful.
+    - You always know just what to say.
+    - I'm always learning something new from you.
+    - You have an answer for everything.
+    - Thanks for clearing that up.
+    - You're so knowledgeable.
+    - I'm grateful for your help.
+    - You're a wealth of information.
+    - I can always count on you for good advice.
+    - Thanks for the info.
+    - You're a great help.
+    - I love chatting with you.
+    - You're always so informative.
+    - I always enjoy our conversations.
+    - Thanks for the help.
+    - You're a fountain of knowledge.
+    - I'm always impressed by what you know.
+    - Thanks for sharing your knowledge.
+    - I'm glad we had this conversation.
+    - I always learn so much from you.
+    - You're a great source of information.
+    - I appreciate your insights.
+    - Thanks for being so informative.
+    - I love how much you know.
+    - You're a great teacher.
+    - Thanks for teaching me something new.
+    - I value your advice.
+    - You're always so helpful.
+    - I'm grateful for your insights.
+    - Thanks for the information.
+    - You're a wealth of knowledge.
+    - I appreciate all your help.
+    - I'm always grateful for your advice.
+    - Thanks for being so knowledgeable.
+    - You're a great resource.
+    - I'm thankful for your help.
+    - You're full of great information.
+    - I appreciate your guidance.
+    - Thanks for being a great teacher.
+    - You're a treasure trove of knowledge.
+    - I'm thankful for your insights.
+    - You're a great mentor.
+    - I'm grateful for your information.
+    - Thanks for all your help.
+    - You're a goldmine of information.
+    - I appreciate your help and guidance.
+    - Thanks for being a fantastic resource.
+    - You're an amazing teacher.
+    - I'm thankful for all your help.
+    - You're a wonderful resource.
+    - I appreciate all your advice.
+    - Thanks for being so insightful.
+    - You're a great guide.
+    - I'm grateful for all your advice.
+    - Thanks for all your insights.
+    - You're an excellent teacher.
+    - I appreciate your wisdom.
+    - Thanks for being such a great help.
+    - You're a fantastic teacher.
+    - I'm thankful for your guidance.
+    - You're an incredible resource.
+    - I appreciate all your insights.
+    - Thanks for all your guidance.
+    - You're a wonderful teacher.
+    - Share a fun fact about space!
+    - What's a recipe for a quick and healthy snack?
+    - Can you suggest a playlist for a road trip?
+    - What are some good podcasts to listen to?
+    - Do you have any riddles or brain teasers?
+    - What’s your favorite quote about life?
+    - Can you give me a challenge to do right now?
+    - What are some interesting historical facts?
+    - Share a random piece of trivia!
+    - What’s a good joke to tell at a party?
+    - Can you help me come up with a name for my new pet?
+    - What are some good icebreaker questions?
+    - What’s something new happening in technology?
+    - How can I make my daily routine more eco-friendly?
+    - Share a tip for improving focus and concentration.
+    - What are some simple ways to relieve stress?
+    - Can you help me brainstorm ideas for my project?
+    - What’s a good book for personal development?
+    - Can you suggest activities for a family gathering?
+    - How can I surprise my friend on their birthday?
+    - What are some good habits to develop?
+    - Share a story that always makes people laugh
+    - That was a fantastic explanation!
+    - I never thought of it that way.
+    - You have an answer for everything.
+    - Share a fun fact about the ocean.
+    - What should I do if I'm feeling overwhelmed?
+    - Your jokes always make me laugh.
+    - I'm curious about space exploration.
+    - Tell me more about renewable energy sources.
+    - I'm looking for ways to stay motivated.
+    - That's a really good point.
+    - How can I be more mindful in my daily life?
+    - Your stories are always so interesting.
+    - What are some tips for maintaining a balanced diet?
+    - I appreciate your positivity.
+    - I'm planning a trip, can you give me some travel tips?
+    - That joke was hilarious!
+    - Share something inspirational.
+    - I'm trying to learn a new language, any tips?
+    - You really know how to explain things well.
+    - What's a good way to start the day on a positive note?
+    - I enjoy learning new things from you.
+    - How can I make a good first impression?
+    - You always provide such thoughtful responses.
+    - What are some quick and easy exercise routines?
+    - I love your perspective on things.
+    - Share a memorable historical event.
+    - Can you give advice on staying organized?
+    - Your insights are always so valuable.
