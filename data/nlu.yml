@@ -16,15 +16,12 @@ nlu:
     - goodevening
     - good afternoon
     - hi there
-
-
-
 - intent: room_booking_intent
   examples: |
-    - I would like to book a room
+    - I would like to book a room from [2](from) to [3](to)
     - can I make a room reservation?
-    - room booking
-    - available room
+    - room booking from [9](from) a.m to [10](to) a.m
+    - available room from [17:00](from) to [18:00](to)
     - I need to reserve a room
     - Is it possible to book a room?
     - I'm looking to book a room for several nights
@@ -48,8 +45,6 @@ nlu:
     - i want to book a room
     - i want a room
     - i want to book a room now
-- intent: inform
-  examples: |
     - From [2](from) pm to [4](to) pm
     - From [9](from) to [10](to)
     - From [9:30](from) to [10:30](to)
@@ -104,7 +99,13 @@ nlu:
     - Arrange a slot between [4:15](from) p.m and [6](to) p.m.
     - My morning is free from [7:15](from) to [8:45](to).
     - Let's set a time from [12:30](from) p.m to [2](to) p.m.
-
+    - i want a room from [8](from) to [9](to)
+    - i want to book a room from [9](from) to [11](to)
+    - from [13](from) to [14](to)
+    - from [9](from) to [10](to)
+    - i want to book a room from [9](from) to [11](to)
+    - i want a room from [8](to) to [9](to) then
+    - from [8](from) to [9](to)
 - intent: inform_name
   examples: |
     - my name is [phil](name)
@@ -197,9 +198,7 @@ nlu:
     - i go by [cato](name)
     - they say I'm [bex](name)
     - my name is [anouk](name)
-
-
-
+    - my name is [Yu](name)
 - intent: stop_booking_form
   examples: |
     - I don't want to book a room
@@ -215,8 +214,6 @@ nlu:
     - i dont want to book a room
     - i dont want a room anymore
     - i dont want to book a room anymore
-
-
 - intent: chat_with_gpt
   examples: |
     - What can you do?
@@ -369,7 +366,6 @@ nlu:
     - Share a story that always makes people laugh
     - That was a fantastic explanation!
     - I never thought of it that way.
-    - You have an answer for everything.
     - Share a fun fact about the ocean.
     - What should I do if I'm feeling overwhelmed?
     - Your jokes always make me laugh.

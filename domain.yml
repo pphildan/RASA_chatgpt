@@ -7,20 +7,18 @@ intents:
 - ask_me_anything
 - backdoor
 - bot_challenge
+- chat_with_gpt
 - greet
-- inform
 - inform_name
 - repeat_name
 - room_booking_intent
 - stop_booking_form
 - tell_more
 - thanks
-- chat_with_gpt
 entities:
-- name
 - from
 - to
-
+- name
 slots:
   from:
     type: text
@@ -34,27 +32,12 @@ slots:
     mappings:
     - type: from_entity
       entity: to
-
-  available:
-    type: bool
-    initial_value: false
-    influence_conversation: false  
-    mappings:
-    - type: custom
   name:
     type: text
     influence_conversation: false
     mappings:
     - type: from_entity
       entity: name
-
-forms:
-  booking_form:
-    required_slots:
-    - from
-    - to
-    - available
-    - name
 responses:
   utter_greet:
   - text: Hey! How can I help you?
@@ -125,19 +108,21 @@ responses:
   utter_stop_booking:
   - text: All right, how else can I help?
   utter_you_welcome:
-  - text: "You're welcome!"
-  - text: "You're welcome! If you have any more questions, feel free to ask."
-  - text: "No problem at all!"
-  - text: "Glad I could help!"
-  - text: "Anytime! Let me know if there's anything else I can do for you."
-  - text: "Happy to assist!"
+  - text: You're welcome!
+  - text: You're welcome! If you have any more questions, feel free to ask.
+  - text: No problem at all!
+  - text: Glad I could help!
+  - text: Anytime! Let me know if there's anything else I can do for you.
+  - text: Happy to assist!
 actions:
-- action_set_available
 - action_confirm_possibility
+- utter_ask_name
+- utter_ask_from
+- action_confirm
+- action_set_available
 - utter_confirm_possibility
 - action_reset_slots
 - utter_tell_facts
-- action_confirm
 - utter_greet
 - utter_stop_booking
 - utter_tell_infos
@@ -150,8 +135,6 @@ actions:
 - utter_did_that_help
 - utter_happy
 - utter_remember
-- utter_ask_from
-- utter_ask_name
 - utter_confirm_all
 - utter_please_rephrase
 - utter_default

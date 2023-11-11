@@ -132,6 +132,7 @@ env.bak/
 venv.bak/
 myenv/
 models/
+config.json
 
 # Spyder project settings
 .spyderproject

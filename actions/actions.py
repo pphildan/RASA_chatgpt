@@ -12,18 +12,25 @@ import os
 import json
 import requests
 import os
-import time
+import time as t
 import random
+from datetime import time
 
 ALLOWED_FROM = ["7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6"]
 ALLOWED_TO = ["7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6"]
 
-os.environ['OPENAI_API_KEY'] = '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'
+config_file = 'actions/config.json'
+with open(config_file, 'r') as f:
+    config = json.load(f)
+
+
+os.environ['OPENAI_API_KEY'] = config['api_key']
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 empty_thread = openai.beta.threads.create()
 thread_id = empty_thread.id
-asst_id = 'asst_X8eIdU1yFT7zaazQFdQLMIwE'
+asst_id = config['assistant']
+#asst_id = 'asst_X8eIdU1yFT7zaazQFdQLMIwE'
 
 
 # filename='conversation_history.json'
@@ -60,7 +67,7 @@ asst_id = 'asst_X8eIdU1yFT7zaazQFdQLMIwE'
 
 
 
-message_sent = False
+not_available_for_this_slot = False
 
 class ActionConfirmBooking(Action):
 
@@ -74,12 +81,11 @@ class ActionConfirmBooking(Action):
         von = tracker.get_slot("from")
         to = tracker.get_slot("to")
         name = tracker.get_slot("name")
-        avail = tracker.get_slot("available")
-        if von is not None and to is not None and name is not None and avail is True:
+        if von is not None and to is not None and name is not None:
             dispatcher.utter_message(text=f"Perfect, I booked a room from {von} to {to} for {name}!")
             global message_sent
             message_sent = False
-        return [AllSlotsReset(), ActiveLoop(None)]
+        return [AllSlotsReset(), FollowupAction('action_listen')]
 
 class ActionConfirmBooking(Action):
 
@@ -90,20 +96,152 @@ class ActionConfirmBooking(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-  
-        actions = ['Action 3', 'Action 3', 'Action 3']
-        selected_action = random.choice(actions)
+        #Simulating vysoft if there are 2 time slots left
+        available_slots = [
+            # Morning slots (8 AM to 10 AM)
+            (time(8, 0), time(10, 0)),
+            # Afternoon slots (1 PM to 6 PM)
+            (time(13, 0), time(18, 0))
+        ]
+        # #Simulating vysoft if there is no room left
+        # available_slots = [
+        #     # Morning slots (8 AM to 10 AM)
+        #     #(time(8, 0), time(10, 0)),
+        #     # Afternoon slots (1 PM to 6 PM)
+        #     #(time(13, 0), time(18, 0))
+        # ]
+        # #Simulating vysoft if there is no booking yet
+        # available_slots = [
+        #     #Morning slots (7 AM to 6 PM)
+        #     (time(7, 0), time(18, 0)),
+        #     #Afternoon slots (1 PM to 6 PM)
+        #     (time(13, 0), time(18, 0))
+        # ]
+        
+        
+        von = tracker.get_slot("from")
+        to = tracker.get_slot("to")
+        name = tracker.get_slot("name")
 
-        # Perform an action based on the selected action
-        if selected_action == 'Action 1':
-            dispatcher.utter_message(text=f"All right, today there are still free rooms all day from 7 am to 6 pm. The maximum duration for a booking is 2 hours.")
-            return [FollowupAction("booking_form")]
-        elif selected_action == 'Action 2':
-            dispatcher.utter_message(text=f"Today we have left an available room from 2 to 6 pm. You can book a maximum of 2 hours time slot.")
-            return [FollowupAction("booking_form")]
-        elif selected_action == 'Action 3':
-            dispatcher.utter_message(text=f"Unfortunately we have no room left today. Sorry for that. Can I assist you with something else?")
-            return [AllSlotsReset(), ActiveLoop(None),FollowupAction('action_listen')]
+
+        if von is not None and to is not None:
+            lookup_table = {
+            '1': '13',
+            '2': '14',
+            '3': '15',
+            '4': '16',
+            '5': '17',
+            '6': '18',
+            '7': '7',
+            '8': '8',
+            '9': '9',
+            '10': '10',
+            '11': '11',
+            '12': '12',
+            }
+
+            von_t = lookup_table[von]
+            to_t = lookup_table[to]
+
+            start_time = time(int(von_t), 0)
+            end_time = time(int(to_t), 0)
+            print(start_time)
+            print(end_time)
+
+
+
+        global not_available_for_this_slot
+
+        if von is not None and to is not None and name is not None:
+            return [FollowupAction("action_confirm")]
+
+        if von is not None and to is not None:
+            if len(available_slots) == 0:
+                dispatcher.utter_message(text=f"Unfortunately we have no room left today. Sorry for that. Can I assist you with something else?")
+                return [AllSlotsReset(), ActiveLoop(None),FollowupAction('action_listen')]
+
+            else:
+                for available_start, available_end in available_slots:
+                    print("Available start: ", available_start)
+                    print("start time: ", start_time)
+                    print("Available end: ", available_end)
+                    print("end time: ", end_time)
+                    start_minutes = start_time.hour * 60 + start_time.minute
+                    end_minutes = end_time.hour * 60 + end_time.minute
+    
+                    # Calculate the difference in minutes
+                    difference = end_minutes - start_minutes
+
+                    if available_start <= start_time and end_time <= available_end:
+                        dispatcher.utter_message(text=f"I checked the availability and we have a room from {von} to {to}.")
+                        if difference > 120:
+                            print(difference)
+                            dispatcher.utter_message(text=f"Ou, you can only book a maximum of 2 hour time slot.")
+                            return [FollowupAction("utter_ask_from"),SlotSet("to", None), SlotSet("from", None)]
+                        else:
+                            return [FollowupAction("utter_ask_name")]
+                    else:
+                        continue
+
+                    
+                not_available_for_this_slot = True
+                print("set_not_available_true")
+                dispatcher.utter_message(text=f"Sorry, we don't have an available room from {von} to {to}.")
+                not_available_for_this_slot = False
+                return [FollowupAction('action_confirm_possibility'),SlotSet("to", None), SlotSet("from", None)]
+
+        else:
+            if len(available_slots) == 0:
+                dispatcher.utter_message(text=f"Unfortunately we have no room left today. Sorry for that. Can I assist you with something else?")
+                return [AllSlotsReset(), ActiveLoop(None),FollowupAction('action_listen')]
+
+            elif available_slots[0] == (time(7, 0), time(18, 0)):
+                dispatcher.utter_message(text=f"All right, today there are still free rooms all day from 7 am to 6 pm. The maximum duration for a booking is 2 hours.")
+                return [FollowupAction("utter_ask_from")]
+
+            else:
+                x = len(available_slots)
+                variable_list = []
+                message = "Today we have a room "
+    
+                for available_start, available_end in available_slots:
+                    variable_value = f"from {available_start} to {available_end}"
+                    # Append the variable value to the list
+                    variable_list.append(variable_value)
+    
+                for i, variable_value in enumerate(variable_list):
+                    message = message + variable_value + " and "
+    
+                    print(message[:-4])
+                dispatcher.utter_message(text=message[:-4]+ ". The maximum duration for a booking is 2 hours.")
+                return [FollowupAction("utter_ask_from")]
+
+        
+
+        #     # Perform an action based on the selected action
+        #     if selected_action == 'Action 1' or selected_action == 'Action 2':
+        #         dispatcher.utter_message(text=f"Great, i checked the availability and we have a room from {von} to {to}.")
+        #         message_sent = True
+        #         return [FollowupAction("booking_form")]
+
+        #     else:
+        #         dispatcher.utter_message(text=f"There is no room left from {von} to {to}. There is a time slot from 3 to 4.")
+        #         global flag
+        #         flag = 1
+        #         message_sent = True
+        #         return [SlotSet("from", None), SlotSet("to", None), SlotSet("requested_slot", "from")]
+
+        # # Perform an action based on the selected action
+        # else:
+        #     if selected_action == 'Action 1':
+        #         dispatcher.utter_message(text=f"All right, today there are still free rooms all day from 7 am to 6 pm. The maximum duration for a booking is 2 hours.")
+        #         return [FollowupAction("booking_form")]
+        #     elif selected_action == 'Action 2':
+        #         dispatcher.utter_message(text=f"Today we have left an available room from 2 to 6 pm. You can book a maximum of 2 hours time slot.")
+        #         return [FollowupAction("booking_form")]
+        #     elif selected_action == 'Action 3':
+        #         dispatcher.utter_message(text=f"Unfortunately we have no room left today. Sorry for that. Can I assist you with something else?")
+        #         return [AllSlotsReset(), ActiveLoop(None),FollowupAction('action_listen')]
 
 class ActionChatWithGPT(Action):
 
@@ -123,7 +261,7 @@ class ActionChatWithGPT(Action):
             assistant_id=asst_id)
     
         while True:
-            time.sleep(0.4)  # Sleep for 500 milliseconds
+            t.sleep(0.4)  # Sleep for 500 milliseconds
             r_run = client.beta.threads.runs.retrieve(
             thread_id=thread_id,
             run_id=run.id)
@@ -173,7 +311,7 @@ class ActionResetSlots(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         dispatcher.utter_message(text="All right, how else can I help?")
-        return [AllSlotsReset(), ActiveLoop(None)]
+        return [AllSlotsReset(), ActiveLoop(None), FollowupAction('action_listen')]
 
 
 class ValidateSimplePizzaForm(FormValidationAction):
@@ -193,7 +331,7 @@ class ValidateSimplePizzaForm(FormValidationAction):
             dispatcher.utter_message(text=f"You can only book a room from 7am to 8pm")
             return {"from": None}
         #dispatcher.utter_message(text=f"OK! You want to have a {slot_value} pizza.")
-        return {"from": slot_value}
+        return {"to": slot_value}
 
     def validate_to(
         self,
@@ -214,16 +352,14 @@ class ValidateSimplePizzaForm(FormValidationAction):
     async def run(self, dispatcher, tracker, domain):
         von = tracker.get_slot("from")
         to = tracker.get_slot("to")
-        global message_sent
+        print("Validation")
+        global not_available_for_this_slot
+       
         if von is not None and to is not None:
-            if not message_sent:
-                dispatcher.utter_message(text=f"Great we have a room from {von} to {to}.")
-                message_sent = True
-                return [SlotSet("available", True)]
-            else:
-                # If the message has already been sent, just return the available slot
-                return [SlotSet("available", True)]
-        else:
+            if not_available_for_this_slot:
+                dispatcher.utter_message(text=f"Sorry, we don't have an available room from {von} to {to}.")
+                not_available_for_this_slot = False
+                return [FollowupAction('action_confirm_possibility'),SlotSet("to", None), SlotSet("from", None)]
             
-            return [SlotSet("available", False)]
-
+                
+            
