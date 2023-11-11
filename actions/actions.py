@@ -19,26 +19,18 @@ from datetime import time
 ALLOWED_FROM = ["7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6"]
 ALLOWED_TO = ["7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6"]
 
-<<<<<<< HEAD
 config_file = 'actions/config.json'
 with open(config_file, 'r') as f:
     config = json.load(f)
 
 
 os.environ['OPENAI_API_KEY'] = config['api_key']
-=======
-os.environ['OPENAI_API_KEY'] = 'your_key'
->>>>>>> ad67e85de7326a1d3416c701103dbf28b48955dd
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 empty_thread = openai.beta.threads.create()
 thread_id = empty_thread.id
-<<<<<<< HEAD
 asst_id = config['assistant']
 #asst_id = 'asst_X8eIdU1yFT7zaazQFdQLMIwE'
-=======
-asst_id = 'your_assist'
->>>>>>> ad67e85de7326a1d3416c701103dbf28b48955dd
 
 
 # filename='conversation_history.json'
