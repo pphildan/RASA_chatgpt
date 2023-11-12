@@ -16,6 +16,38 @@ nlu:
     - goodevening
     - good afternoon
     - hi there
+
+- intent: thanks
+  examples: |
+    - thank you
+    - thanks
+    - much appreciated
+    - I appreciate it
+    - thanks a bunch
+    - thanks a lot
+    - thank you very much
+    - thank you so much
+    - many thanks
+    - cheers
+    - thanks a million
+    - thanks for everything
+    - I can't thank you enough
+    - I'm grateful
+    - my gratitude
+    - I owe you one
+    - you have my thanks
+    - I'm so thankful
+    - thanks for your help
+    - thanks for your assistance
+    - thank you for your support
+    - heartfelt thanks
+    - my sincere thanks
+    - I really appreciate it
+    - I'm indebted to you
+    - thank you for your kindness
+    - thanks for being there
+
+
 - intent: room_booking_intent
   examples: |
     - I would like to book a room from [2](from) to [3](to)
@@ -47,21 +79,21 @@ nlu:
     - i want to book a room now
     - From [2](from) pm to [4](to) pm
     - From [9](from) to [10](to)
-    - From [9:30](from) to [10:30](to)
+    - From [9:30](from) am to [10:30](to) am
     - From [3](from) to [4](to)
     - From [4](from) pm to [5:30](to) pm
     - From [7:15](from) to [9:15](to)
-    - From [2](from) to [3:30](to)
+    - From [2](from) pm to [3.30](to) pm
     - I need it between [3](from) and [4](to)
-    - Can I get a slot from [1](from) till [2:30](to)?
-    - I'm available [5:30](from) through [7](to)
+    - Can I get a slot from [1](from) till [2.30](to)?
+    - I'm available [5.30](from) through [7](to)
     - Booking a time slot from [11](from) until [12](to)
     - I'd like to reserve [12](from) to [1](to)
     - Schedule something from [6](from) up to [8](to)
     - Need a booking from [10](from) to [11](to)
-    - Set a time from [2:30](from) to [4:30](to)
+    - Set a time from [2.30](from) to [4.30](to)
     - I'm looking to book from [8](from) until [10](to)
-    - Reserving time from [3:30](from) to [5](to)
+    - Reserving time from [3.30](from) to [5](to)
     - I want to schedule from [4](from) to [6](to)
     - Looking for a slot between [1:30](from) and [3:30](to)
     - I wish to book a period from [9](from) to [11](to)
@@ -71,7 +103,7 @@ nlu:
     - Set aside time from [2](from) to [4:15](to)
     - From [1](from) to [2:30](to)
     - From [5:30](from) to [7](to)
-    - From [11](from) to [12](to)
+    - From [11.15](from) to [12.30](to)
     - From [12](from) to [1](to)
     - From [6](from) to [8](to)
     - I can make it from [11:30](from) to [1:30](to)
@@ -89,23 +121,27 @@ nlu:
     - from [2](from) to [4](to)a.m
     - from  [2](from) am to [3](to) am
     - from [2](from) to [4](to)
+    - [7](from) am to [3](to)am
+    - [8.30](from) am to [10.30](to)am
+    - [9.15](from) am to [11](to) am
+    - [11.30](from) to [12.15](to)
     - I am free between [8:00](from) a.m and [9:30](to) a.m.
-    - Schedule a meeting from [11:45](from) a.m to [1:15](to) p.m.
-    - My availability is from [3:30](from) p.m to [5:00](to) p.m.
+    - Schedule a meeting from [11:45](from) a.m to [1:15](to) pm
+    - My availability is from [3:30](from) p.m to [5:00](to) pm
     - Block out time from [10](from) a.m to [11:30](to) a.m.
     - I can meet from [2:45](from) p.m to [4:00](to) p.m.
     - Reserve [9](from) to [10:15](to) in the morning.
     - I'm open from [3](from) p.m until [5:45](to) p.m.
-    - Arrange a slot between [4:15](from) p.m and [6](to) p.m.
+    - Arrange a slot between [4:15](from) pm and [6](to) 
     - My morning is free from [7:15](from) to [8:45](to).
-    - Let's set a time from [12:30](from) p.m to [2](to) p.m.
+    - Let's set a time from [12:30](from) p.m to [2](to) p.m
     - i want a room from [8](from) to [9](to)
     - i want to book a room from [9](from) to [11](to)
     - from [13](from) to [14](to)
-    - from [9](from) to [10](to)
+    - from [9](from) am to [10](to) am
     - i want to book a room from [9](from) to [11](to)
     - i want a room from [8](to) to [9](to) then
-    - from [8](from) to [9](to)
+    - from [8.45](from) to [9.45](to)
 - intent: inform_name
   examples: |
     - my name is [phil](name)

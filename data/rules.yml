@@ -8,7 +8,6 @@ rules:
   - intent: room_booking_intent
   - action: action_confirm_possibility
 
-
 - rule: name
   steps:
   - intent: inform_name
@@ -23,6 +22,11 @@ rules:
   steps:
   - intent: stop_booking_form
   - action: action_reset_slots
+
+- rule: you welcome
+  steps:
+  - intent: thanks
+  - action: utter_you_welcome
 
 
 

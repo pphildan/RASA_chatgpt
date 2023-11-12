@@ -14,7 +14,7 @@ import requests
 import os
 import time as t
 import random
-from datetime import time
+from datetime import time, datetime
 
 ALLOWED_FROM = ["7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6"]
 ALLOWED_TO = ["7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6"]
@@ -82,7 +82,7 @@ class ActionConfirmBooking(Action):
         to = tracker.get_slot("to")
         name = tracker.get_slot("name")
         if von is not None and to is not None and name is not None:
-            dispatcher.utter_message(text=f"Perfect, I booked a room from {von} to {to} for {name}!")
+            dispatcher.utter_message(text=f"Perfect, I booked a room from {von} to {to} for {name}! The room is located on the first floor on the left-hand side. There is a screen in front of the room where you can see your reservation shortly before the start of the time.")
             global message_sent
             message_sent = False
         return [AllSlotsReset(), FollowupAction('action_listen')]
@@ -126,25 +126,61 @@ class ActionConfirmBooking(Action):
 
         if von is not None and to is not None:
             lookup_table = {
-            '1': '13',
-            '2': '14',
-            '3': '15',
-            '4': '16',
-            '5': '17',
-            '6': '18',
-            '7': '7',
-            '8': '8',
-            '9': '9',
-            '10': '10',
-            '11': '11',
-            '12': '12',
+            '7': '07:00:00',
+            '7.15': '07:15:00',
+            '7.30': '07:30:00',
+            '7.45': '07:45:00',
+            '8': '08:00:00',
+            '8.15': '08:15:00',
+            '8.30': '08:30:00',
+            '8.45': '08:45:00',
+            '9': '09:00:00',
+            '9.15': '09:15:00',
+            '9.30': '09:30:00',
+            '9.45': '09:45:00',
+            '10': '10:00:00',
+            '10.15': '10:15:00',
+            '10.30': '10:30:00',
+            '10.45': '10:45:00',
+            '11': '11:00:00',
+            '11.15': '11:15:00',
+            '11.30': '11:30:00',
+            '11.45': '11:45:00',
+            '12': '12:00:00',
+            '12.15': '12:15:00',
+            '12.30': '12:30:00',
+            '12.45': '12:45:00',
+            '1': '13:00:00',
+            '1.15': '13:15:00',
+            '1.30': '13:30:00',
+            '1.45': '13:45:00',
+            '2': '14:00:00',
+            '2.15': '14:15:00',
+            '2.30': '14:30:00',
+            '2.45': '14:45:00',
+            '3': '15:00:00',
+            '3.15': '15:15:00',
+            '3.30': '15:30:00',
+            '3.45': '15:45:00',
+            '4': '16:00:00',
+            '4.15': '16:15:00',
+            '4.30': '16:30:00',
+            '4.45': '16:45:00',
+            '5': '17:00:00',
+            '5.15': '17:15:00',
+            '5.30': '17:30:00',
+            '5.45': '17:45:00',
+            '6': '18:00:00'
             }
 
             von_t = lookup_table[von]
             to_t = lookup_table[to]
-
-            start_time = time(int(von_t), 0)
-            end_time = time(int(to_t), 0)
+            start_time = datetime.strptime(von_t, '%H:%M:%S').time()
+            end_time = datetime.strptime(to_t, '%H:%M:%S').time()
+            #start_time = time(int(von_t), 0)
+            #end_time = time(int(to_t), 0)
+            #start_time = von_t
+            #end_time = to_t
             print(start_time)
             print(end_time)
 
@@ -157,15 +193,11 @@ class ActionConfirmBooking(Action):
 
         if von is not None and to is not None:
             if len(available_slots) == 0:
-                dispatcher.utter_message(text=f"Unfortunately we have no room left today. Sorry for that. Can I assist you with something else?")
+                dispatcher.utter_message(text=f"Unfortunately we have no room left today. Sorry about that. Can I assist you with something else?")
                 return [AllSlotsReset(), ActiveLoop(None),FollowupAction('action_listen')]
 
             else:
                 for available_start, available_end in available_slots:
-                    print("Available start: ", available_start)
-                    print("start time: ", start_time)
-                    print("Available end: ", available_end)
-                    print("end time: ", end_time)
                     start_minutes = start_time.hour * 60 + start_time.minute
                     end_minutes = end_time.hour * 60 + end_time.minute
     
@@ -173,10 +205,10 @@ class ActionConfirmBooking(Action):
                     difference = end_minutes - start_minutes
 
                     if available_start <= start_time and end_time <= available_end:
-                        dispatcher.utter_message(text=f"I checked the availability and we have a room from {von} to {to}.")
+                        dispatcher.utter_message(text=f"I have checked the availability. We have a room from {von} to {to}.")
                         if difference > 120:
                             print(difference)
-                            dispatcher.utter_message(text=f"Ou, you can only book a maximum of 2 hour time slot.")
+                            dispatcher.utter_message(text=f"But, you can only book a maximum of 2 hour slots.")
                             return [FollowupAction("utter_ask_from"),SlotSet("to", None), SlotSet("from", None)]
                         else:
                             return [FollowupAction("utter_ask_name")]
@@ -186,26 +218,26 @@ class ActionConfirmBooking(Action):
                     
                 not_available_for_this_slot = True
                 print("set_not_available_true")
-                dispatcher.utter_message(text=f"Sorry, we don't have an available room from {von} to {to}.")
+                dispatcher.utter_message(text=f"Sorry, we don't have any rooms available from {von} to {to}.")
                 not_available_for_this_slot = False
                 return [FollowupAction('action_confirm_possibility'),SlotSet("to", None), SlotSet("from", None)]
 
         else:
             if len(available_slots) == 0:
-                dispatcher.utter_message(text=f"Unfortunately we have no room left today. Sorry for that. Can I assist you with something else?")
+                dispatcher.utter_message(text=f"Unfortunately we have no room left today. Sorry about that. Can I assist you with something else?")
                 return [AllSlotsReset(), ActiveLoop(None),FollowupAction('action_listen')]
 
             elif available_slots[0] == (time(7, 0), time(18, 0)):
-                dispatcher.utter_message(text=f"All right, today there are still free rooms all day from 7 am to 6 pm. The maximum duration for a booking is 2 hours.")
+                dispatcher.utter_message(text=f"All right, today there are rooms available all day from 7am to 6pm. The maximum booking time is 2 hours.")
                 return [FollowupAction("utter_ask_from")]
 
             else:
                 x = len(available_slots)
                 variable_list = []
-                message = "Today we have a room "
+                message = "Today we have a free time slot "
     
                 for available_start, available_end in available_slots:
-                    variable_value = f"from {available_start} to {available_end}"
+                    variable_value = f"from {str(available_start)[:-3]} to {str(available_end)[:-3]}"
                     # Append the variable value to the list
                     variable_list.append(variable_value)
     
@@ -286,6 +318,7 @@ class ActionChatWithGPT(Action):
     
         # Extract the assistant's reply
         assistant_reply = thread_messages.data[0].content[0].text.value
+        print(assistant_reply)
     
 
         try:
