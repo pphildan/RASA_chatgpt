@@ -134,6 +134,8 @@ myenv/
 models/
 config.json
 conversation_history.txt
+output.wav
+speech.mp3
 
 # Spyder project settings
 .spyderproject
