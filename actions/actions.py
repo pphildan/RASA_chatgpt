@@ -16,8 +16,8 @@ import time as t
 import random
 from datetime import time, datetime
 
-ALLOWED_FROM = ["7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6"]
-ALLOWED_TO = ["7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6"]
+#ALLOWED_FROM = ["7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6"]
+#ALLOWED_TO = ["7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6"]
 
 config_file = 'actions/config.json'
 with open(config_file, 'r') as f:
@@ -30,7 +30,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 empty_thread = openai.beta.threads.create()
 thread_id = empty_thread.id
 asst_id = config['assistant']
-#asst_id = 'asst_X8eIdU1yFT7zaazQFdQLMIwE'
+
 
 
 # filename='conversation_history.json'
@@ -103,19 +103,19 @@ class ActionConfirmBooking(Action):
             # Afternoon slots (1 PM to 6 PM)
             (time(13, 0), time(18, 0))
         ]
-        # #Simulating vysoft if there is no room left
+        #Simulating vysoft if there is no room left
         # available_slots = [
         #     # Morning slots (8 AM to 10 AM)
         #     #(time(8, 0), time(10, 0)),
         #     # Afternoon slots (1 PM to 6 PM)
         #     #(time(13, 0), time(18, 0))
         # ]
-        # #Simulating vysoft if there is no booking yet
+        #Simulating vysoft if there is no booking yet
         # available_slots = [
         #     #Morning slots (7 AM to 6 PM)
         #     (time(7, 0), time(18, 0)),
         #     #Afternoon slots (1 PM to 6 PM)
-        #     (time(13, 0), time(18, 0))
+        #     #(time(13, 0), time(18, 0))
         # ]
         
         
@@ -211,7 +211,7 @@ class ActionConfirmBooking(Action):
                             dispatcher.utter_message(text=f"But, you can only book a maximum of 2 hour slots.")
                             return [FollowupAction("utter_ask_from"),SlotSet("to", None), SlotSet("from", None)]
                         else:
-                            return [FollowupAction("utter_ask_name")]
+                            return [FollowupAction("utter_ask_name"), SlotSet("name", None)]
                     else:
                         continue
 
@@ -220,7 +220,7 @@ class ActionConfirmBooking(Action):
                 print("set_not_available_true")
                 dispatcher.utter_message(text=f"Sorry, we don't have any rooms available from {von} to {to}.")
                 not_available_for_this_slot = False
-                return [FollowupAction('action_confirm_possibility'),SlotSet("to", None), SlotSet("from", None)]
+                return [FollowupAction('action_confirm_possibility'),SlotSet("to", None), SlotSet("from", None), SlotSet("name", None)]
 
         else:
             if len(available_slots) == 0:
@@ -229,7 +229,7 @@ class ActionConfirmBooking(Action):
 
             elif available_slots[0] == (time(7, 0), time(18, 0)):
                 dispatcher.utter_message(text=f"All right, today there are rooms available all day from 7am to 6pm. The maximum booking time is 2 hours.")
-                return [FollowupAction("utter_ask_from")]
+                return [FollowupAction("utter_ask_from"), SlotSet("name", None)]
 
             else:
                 x = len(available_slots)
@@ -246,7 +246,7 @@ class ActionConfirmBooking(Action):
     
                     print(message[:-4])
                 dispatcher.utter_message(text=message[:-4]+ ". The maximum duration for a booking is 2 hours.")
-                return [FollowupAction("utter_ask_from")]
+                return [FollowupAction("utter_ask_from"), SlotSet("name", None)]
 
         
 
@@ -347,52 +347,52 @@ class ActionResetSlots(Action):
         return [AllSlotsReset(), ActiveLoop(None), FollowupAction('action_listen')]
 
 
-class ValidateSimplePizzaForm(FormValidationAction):
-    def name(self) -> Text:
-        return "validate_booking_form"
+# class ValidateSimplePizzaForm(FormValidationAction):
+#     def name(self) -> Text:
+#         return "validate_booking_form"
 
-    def validate_from(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict,
-    ) -> Dict[Text, Any]:
-        """Validate `from` value."""
+#     def validate_from(
+#         self,
+#         slot_value: Any,
+#         dispatcher: CollectingDispatcher,
+#         tracker: Tracker,
+#         domain: DomainDict,
+#     ) -> Dict[Text, Any]:
+#         """Validate `from` value."""
 
-        if slot_value.lower() not in ALLOWED_FROM:
-            dispatcher.utter_message(text=f"You can only book a room from 7am to 8pm")
-            return {"from": None}
-        #dispatcher.utter_message(text=f"OK! You want to have a {slot_value} pizza.")
-        return {"to": slot_value}
+#         if slot_value.lower() not in ALLOWED_FROM:
+#             dispatcher.utter_message(text=f"You can only book a room from 7am to 8pm")
+#             return {"from": None}
+#         #dispatcher.utter_message(text=f"OK! You want to have a {slot_value} pizza.")
+#         return {"to": slot_value}
 
-    def validate_to(
-        self,
-        slot_value: Any,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict,
-    ) -> Dict[Text, Any]:
-        """Validate `to` value."""
+#     def validate_to(
+#         self,
+#         slot_value: Any,
+#         dispatcher: CollectingDispatcher,
+#         tracker: Tracker,
+#         domain: DomainDict,
+#     ) -> Dict[Text, Any]:
+#         """Validate `to` value."""
 
-        if slot_value not in ALLOWED_TO:
-            dispatcher.utter_message(text=f"You can only book a room from 7am to 8pm")
-            return {"to": None}
-        #dispatcher.utter_message(text=f"OK! You want to have a {slot_value} pizza.")
-        return {"to": slot_value}
+#         if slot_value not in ALLOWED_TO:
+#             dispatcher.utter_message(text=f"You can only book a room from 7am to 8pm")
+#             return {"to": None}
+#         #dispatcher.utter_message(text=f"OK! You want to have a {slot_value} pizza.")
+#         return {"to": slot_value}
 
 
-    async def run(self, dispatcher, tracker, domain):
-        von = tracker.get_slot("from")
-        to = tracker.get_slot("to")
-        print("Validation")
-        global not_available_for_this_slot
+#     async def run(self, dispatcher, tracker, domain):
+#         von = tracker.get_slot("from")
+#         to = tracker.get_slot("to")
+#         print("Validation")
+#         global not_available_for_this_slot
        
-        if von is not None and to is not None:
-            if not_available_for_this_slot:
-                dispatcher.utter_message(text=f"Sorry, we don't have an available room from {von} to {to}.")
-                not_available_for_this_slot = False
-                return [FollowupAction('action_confirm_possibility'),SlotSet("to", None), SlotSet("from", None)]
+#         if von is not None and to is not None:
+#             if not_available_for_this_slot:
+#                 dispatcher.utter_message(text=f"Sorry, we don't have an available room from {von} to {to}.")
+#                 not_available_for_this_slot = False
+#                 return [FollowupAction('action_confirm_possibility'),SlotSet("to", None), SlotSet("from", None)]
             
                 
             
