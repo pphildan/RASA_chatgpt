@@ -235,6 +235,24 @@ nlu:
     - they say I'm [bex](name)
     - my name is [anouk](name)
     - my name is [Yu](name)
+    - [Yonas](name)
+    - [Jonas](name)
+    - [Phil](name)
+    - [Dominik](name)
+    - [yu](name)
+    - [Yu](name)
+    - [Valentin!](name)
+    - [Valentin](name)!
+    - [Lukas](name)
+    - [Luca](name)
+    - [Noah](name)
+    - [Sina](name)
+    - [Lorena](name)
+    - [lisa](name)
+    - [mirabella](name)
+    - [anouk](name)
+    - [bex](name)
+    - [logan](name)
 - intent: stop_booking_form
   examples: |
     - I don't want to book a room
@@ -252,6 +270,9 @@ nlu:
     - i dont want to book a room anymore
 - intent: chat_with_gpt
   examples: |
+    - Whats your name?
+    - what's your name?
+    - your name? 
     - What can you do?
     - Where is the room?
     - Which room did you reserve?

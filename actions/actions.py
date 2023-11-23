@@ -170,7 +170,28 @@ class ActionConfirmBooking(Action):
             '5.15': '17:15:00',
             '5.30': '17:30:00',
             '5.45': '17:45:00',
-            '6': '18:00:00'
+            '6': '18:00:00',
+            '13': '13:00:00',
+            '13.15': '13:15:00',
+            '13.30': '13:30:00',
+            '13.45': '13:45:00',
+            '14': '14:00:00',
+            '14.15': '14:15:00',
+            '14.30': '14:30:00',
+            '14.45': '14:45:00',
+            '15': '15:00:00',
+            '15.15': '15:15:00',
+            '15.30': '15:30:00',
+            '15.45': '15:45:00',
+            '16': '16:00:00',
+            '16.15': '16:15:00',
+            '16.30': '16:30:00',
+            '16.45': '16:45:00',
+            '17': '17:00:00',
+            '17.15': '17:15:00',
+            '17.30': '17:30:00',
+            '17.45': '17:45:00',
+            '18': '18:00:00',
             }
 
             von_t = lookup_table[von]
@@ -326,9 +347,8 @@ class ActionChatWithGPT(Action):
             json_obj = json.loads(assistant_reply)
             # Check if the response contains the "room_booking" intent
             if json_obj['intent'] == 'room_booking':
-                dispatcher.utter_message(text="You can book one of our group rooms today for 2 hours between 7am and 6 pm.")
 
-                return [FollowupAction("booking_form")]
+                return [FollowupAction("action_confirm_possibility")]
                     
         except json.JSONDecodeError:
             # The assistant's reply is not a valid JSON string

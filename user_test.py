@@ -60,10 +60,12 @@ def text_to_speech(text):
         print(f"Request failed with status code {response.status_code}: {response.text}")
         return None
 
-txt_file_path = 'conversation_history.txt'
+#txt_file_path = 'conversation_history.txt'
 
 name = input("Name of participant: ")
 date = input("Date of user test: ")
+
+txt_file_path = f'/Users/phildan/Dev/Navel/user_tests/conversation_history_{name}.txt'
 
 # Function to append a single line to the txt file
 def append_to_txt(file_path, line):
@@ -86,12 +88,13 @@ else:
 while True:
 
     #record your voice and save it
-    print("..")
+    print("RECORDING")
     fs = 44100  # Sample rate
-    seconds = 5  # Duration of recording
+    seconds = 6  # Duration of recording
 
     myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=1)
     sd.wait()  # Wait until recording is finished
+    print("STOP RECORDING")
     write('output.wav', fs, myrecording)
     audio_file = open("output.wav", "rb")
     user_message = client.audio.transcriptions.create(
