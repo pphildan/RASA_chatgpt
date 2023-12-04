@@ -13,10 +13,16 @@ rules:
   - intent: inform_name
   - action: action_confirm_possibility
 
+
 - rule: chat with ChatGPT
   steps:
   - intent: chat_with_gpt
   - action: action_chat_with_gpt
+
+- rule: weather rule
+  steps:
+  - intent: weather
+  - action: current_weather
 
 - rule: stop booking process
   steps:
@@ -27,6 +33,16 @@ rules:
   steps:
   - intent: thanks
   - action: utter_you_welcome
+
+- rule: next bus
+  steps:
+  - intent: next_bus_intent
+  - action: next_bus
+  
+- rule: event lendar
+  steps: 
+  - intent: events
+  - action: current_events
 
 
 

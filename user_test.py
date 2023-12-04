@@ -119,5 +119,4 @@ while True:
                 audio_file = text_to_speech(cleaned_response)
 
 
-    else:
-        print("no connection, please try again")
+   

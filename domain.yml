@@ -8,13 +8,15 @@ intents:
 - backdoor
 - bot_challenge
 - chat_with_gpt
-- greet
 - inform_name
 - repeat_name
 - room_booking_intent
 - stop_booking_form
 - tell_more
 - thanks
+- weather
+- events
+- next_bus_intent
 entities:
 - from
 - to
@@ -140,3 +142,6 @@ actions:
 - utter_default
 - validate_booking_form
 - action_chat_with_gpt
+- current_weather
+- current_events
+- next_bus

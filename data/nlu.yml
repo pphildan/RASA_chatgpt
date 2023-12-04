@@ -1,21 +1,6 @@
 version: "3.1"
 nlu:
-- intent: greet
-  examples: |
-    - hey
-    - hello
-    - hi
-    - hello there
-    - good morning
-    - good evening
-    - moin
-    - hey there
-    - let's go
-    - hey dude
-    - goodmorning
-    - goodevening
-    - good afternoon
-    - hi there
+
 
 - intent: thanks
   examples: |
@@ -50,10 +35,7 @@ nlu:
 
 - intent: room_booking_intent
   examples: |
-    - I would like to book a room from [2](from) to [3](to)
     - can I make a room reservation?
-    - room booking from [9](from) a.m to [10](to) a.m
-    - available room from [17:00](from) to [18:00](to)
     - I need to reserve a room
     - Is it possible to book a room?
     - I'm looking to book a room for several nights
@@ -77,71 +59,73 @@ nlu:
     - i want to book a room
     - i want a room
     - i want to book a room now
-    - From [2](from) pm to [4](to) pm
-    - From [9](from) to [10](to)
-    - From [9:30](from) am to [10:30](to) am
-    - From [3](from) to [4](to)
-    - From [4](from) pm to [5:30](to) pm
-    - From [7:15](from) to [9:15](to)
-    - From [2](from) pm to [3.30](to) pm
-    - I need it between [3](from) and [4](to)
-    - Can I get a slot from [1](from) till [2.30](to)?
-    - I'm available [5.30](from) through [7](to)
-    - Booking a time slot from [11](from) until [12](to)
-    - I'd like to reserve [12](from) to [1](to)
-    - Schedule something from [6](from) up to [8](to)
-    - Need a booking from [10](from) to [11](to)
-    - Set a time from [2.30](from) to [4.30](to)
-    - I'm looking to book from [8](from) until [10](to)
-    - Reserving time from [3.30](from) to [5](to)
-    - I want to schedule from [4](from) to [6](to)
-    - Looking for a slot between [1:30](from) and [3:30](to)
-    - I wish to book a period from [9](from) to [11](to)
-    - Arrange a meeting from [8:30](from) till [10:30](to)
-    - I have time from [10:15](from) to [12:15](to)
-    - Prefer a slot from [1](from) to [3](to)
-    - Set aside time from [2](from) to [4:15](to)
-    - From [1](from) to [2:30](to)
-    - From [5:30](from) to [7](to)
-    - From [11.15](from) to [12.30](to)
-    - From [12](from) to [1](to)
-    - From [6](from) to [8](to)
-    - I can make it from [11:30](from) to [1:30](to)
-    - I'm free from [9:45](from) until [11:45](to)
-    - Would like to book from [3](from) to [5](to)
-    - I'd prefer from [2](from) till [4](to)
-    - Let's set a time from [1](from) to [2](to)
-    - Could we arrange from [4:30](from) to [6:30](to)?
-    - I want a booking between [10:30](from) and [12:30](to)
-    - Schedule me in from [3:15](from) to [5:15](to)
-    - Looking to reserve from [2:45](from) to [4:45](to)
-    - Please book from [11](from) to [1](to)
-    - from [8](from)am to [10](to) am
-    - from [2](from) to [3](to)am
-    - from [2](from) to [4](to)a.m
-    - from  [2](from) am to [3](to) am
-    - from [2](from) to [4](to)
-    - [7](from) am to [3](to)am
-    - [8.30](from) am to [10.30](to)am
-    - [9.15](from) am to [11](to) am
-    - [11.30](from) to [12.15](to)
-    - I am free between [8:00](from) a.m and [9:30](to) a.m.
-    - Schedule a meeting from [11:45](from) a.m to [1:15](to) pm
-    - My availability is from [3:30](from) p.m to [5:00](to) pm
-    - Block out time from [10](from) a.m to [11:30](to) a.m.
-    - I can meet from [2:45](from) p.m to [4:00](to) p.m.
-    - Reserve [9](from) to [10:15](to) in the morning.
-    - I'm open from [3](from) p.m until [5:45](to) p.m.
-    - Arrange a slot between [4:15](from) pm and [6](to) 
-    - My morning is free from [7:15](from) to [8:45](to).
-    - Let's set a time from [12:30](from) p.m to [2](to) p.m
-    - i want a room from [8](from) to [9](to)
-    - i want to book a room from [9](from) to [11](to)
-    - from [13](from) to [14](to)
-    - from [9](from) am to [10](to) am
-    - i want to book a room from [9](from) to [11](to)
-    - i want a room from [8](to) to [9](to) then
-    - from [8.45](from) to [9.45](to)
+    - From 2 pm to 4 pm
+    - From 9 to 10
+    - From 9:30 am to 10:30 am
+    - From 3 to 4
+    - From 4 pm to 5:30 pm
+    - From 7:15 to 9:15
+    - From 2 pm to 3.30 pm
+    - I need it between 3 and 4
+    - Can I get a slot from 1 till 2.30?
+    - I'm available 5.30 through 7
+    - Booking a time slot from 11 until 12
+    - I'd like to reserve 12 to 1
+    - Schedule something from 6 up to 8
+    - Need a booking from 10 to 11
+    - Set a time from 2.30 to 4.30
+    - I'm looking to book from 8 until 10
+    - Reserving time from 3.30 to 5
+    - I want to schedule from 4 to 6
+    - Looking for a slot between 1:30 and 3:30
+    - I wish to book a period from 9 to 11
+    - Arrange a meeting from 8:30 till 10:30
+    - I have time from 10:15 to 12:15
+    - Prefer a slot from 1 to 3
+    - Set aside time from 2 to 4:15
+    - From 1 to 2:30
+    - From 5:30 to 7
+    - From 11.15 to 12.30
+    - From 12 to 1
+    - From 6 to 8
+    - I can make it from 11:30 to 1:30
+    - I'm free from 9:45 until 11:45
+    - Would like to book from 3 to 5
+    - I'd prefer from 2 till 4
+    - Let's set a time from 1 to 2
+    - Could we arrange from 4:30 to 6:30?
+    - I want a booking between 10:30 and 12:30
+    - Schedule me in from 3:15 to 5:15
+    - Looking to reserve from 2:45 to 4:45
+    - Please book from 11 to 1
+    - from 8 am to 10 am
+    - from 2 to 3 am
+    - from 2 to 4 a.m
+    - from 2 am to 3 am
+    - from 2 to 4
+    - 7 am to 3 am
+    - 8.30 am to 10.30 am
+    - 9.15 am to 11 am
+    - 11.30 to 12.15
+    - I am free between 8:00 a.m and 9:30 a.m.
+    - Schedule a meeting from 11:45 a.m to 1:15 pm
+    - My availability is from 3:30 p.m to 5:00 pm
+    - Block out time from 10 a.m to 11:30 a.m.
+    - I can meet from 2:45 p.m to 4:00 p.m.
+    - Reserve 9 to 10:15 in the morning.
+    - I'm open from 3 p.m until 5:45 p.m.
+    - Arrange a slot between 4:15 pm and 6 
+    - My morning is free from 7:15 to 8:45.
+    - Let's set a time from 12:30 p.m to 2 p.m
+    - i want a room from 8 to 9
+    - i want to book a room from 9 to 11
+    - from 13 to 14
+    - from 9 am to 10 am
+    - i want to book a room from 9 to 11
+    - i want a room from 8 to 9 then
+    - from 8.45 to 9.45
+
+    
 - intent: inform_name
   examples: |
     - my name is [phil](name)
@@ -268,8 +252,75 @@ nlu:
     - i dont want to book a room
     - i dont want a room anymore
     - i dont want to book a room anymore
+
+- intent: weather
+  examples: |
+    - What is the current weather?
+    - Can you update me on today's weather?
+    - What's the weather forecast for today?
+    - Could you tell me the weather conditions right now?
+    - How's the weather looking today?
+    - What is the temperature outside at the moment?
+    - Are there any weather warnings for today?
+    - Is it going to rain/snow today?
+    - please provide the weather update
+    - current weather status
+    - weather report for the day
+    - weather outlook for this week
+    - check the weather forecast
+    - tell me about today's weather
+    - need information on the current climate
+    - any chance of rain this evening
+    - expect sunny or cloudy weather today
+    - what's the weather like outside
+    - is it cold outside today
+    - will there be a storm today
+    - weather update for my location
+    - temperature reading for the day
+    - any severe weather alerts for today
+    - is it a good day to go outside
+    - chances of precipitation today
+- intent: events
+  examples: |
+    - What are the latest events happening now
+    - Can you give me an update on recent events
+    - Are there any notable events happening today in Square
+    - I'd like to hear about current news events
+    - What major events are happening this week?
+    - Can you provide information on today's event happenings?
+    - Tell me about the current events
+    - Can you brief me on today's major events?
+    - Latest events update, please.
+    - What's on the public program toda
+    - Can you give me a rundown of the public presentations happening this week?
+    - What are the latest public events scheduled for today?
+    - Tell me about the current public program
+    - Any interesting public presentations coming up soon?
+    - I'm looking for information on the public events scheduled for this month.
+    - What's included in the public program at this week?
+    - Are there any notable public presentations or events today?
+    - What are the upcoming highlights in the public event calendar?
+    - I'd like to know about this weekend's public program.
+    - Can you update me on the next public presentations?
+    - What public events are happening in the local area?
+    - Show me the schedule for public events this month.
+    - Are there any special public presentations scheduled soon
+    - What's happening in the public program
+    - I need details on the latest public program.
+    - What's the lineup for today's public events?
+    - Overview of this week's public presentations?
+    - What's featured in the public event program for today?
+    - Current lineup of public presentations?
+    - Highlights of the public program for the week?
+
 - intent: chat_with_gpt
   examples: |
+    - yes
+    - yes please
+    - YES
+    - yes!
+    - Oh yes
+    - That would be nice
     - Whats your name?
     - what's your name?
     - your name? 
@@ -448,3 +499,55 @@ nlu:
     - Share a memorable historical event.
     - Can you give advice on staying organized?
     - Your insights are always so valuable.
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+    - hi there
+
+- intent: next_bus_intent
+  examples: |
+    - When does the next bus leaves?
+    - next bus from Gatterstrasse?
+    - bus from Dufourstrasse?
+    - When does the next bus leaves Uni Dfurstrasse?
+    - When does the next bus leaves Uni?
+    - bus from Gatterstrasse
+    - bus from Gatter street
+    - when's the next bus from Uni Gatterstrasse?
+    - Next bus time at Uni Gaterstrase?
+    - When does the next bus leave from Gatterstrasse?
+    - bus schedule for Uni Gatter street?
+    - What time is the next bus at Gatterstrasse University?
+    - Can I get the next bus timing from Gattersrasse
+    - will the next bus arrive at Gatterstrase
+    - Next bus departure from Gatterstrasse Uni
+    -  next bus from Uni Gatterstr?
+    - Schedule for the next bus at University Gatterstrase?
+    - When's the next bus from Dufourstrasse
+    - Next bus time at Uni Duforstrasse
+    - When does the next bus leave from dufourstrasse
+    - Bus schedule for Uni Dufour street?
+    - What time is the next bus at Dufourstrasse University
+    - Can I get the next bus timing from Uni Duforstrase
+    - When will the next bus arrive at Uni dufourstrase
+    - Next bus departure from dufour strasse Uni
+    - Time for the next bus from Uni Dfourstr?
+    - Schedule for the next bus at University dforstrasse
+    - When does the next bus leave from gatter street?
+    - bus schedule for Uni Dufour street?
+    - What time is the next bus at Dufourstrasse University
+    - Can I get the next bus timing from Uni Duforstrase?
+    - when will the next bus arrive at Uni dufour street
+    - Next bus departure from dufour strasse Uni?
+    - Time for the next bus from Uni Dfourstr?
+    - Schedule for the next bus at University dfor street?
