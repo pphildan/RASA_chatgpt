@@ -86,38 +86,6 @@ def run_thread():
 
     return thread_messages
 
-# filename='conversation_history.json'
-# conversation_history = [{"role": "system", "content": ""}]
-# with open(filename, 'w') as f:
-#     json.dump(conversation_history, f)
-
-
-# info_string = ("You are now a social robot named Navel, situated within a university building called SQUARE. "
-#                "You have the capability to answer questions regarding SQUARE and book a group room for a maximum of 2 hours today. Answer with maximum of 25 words! "
-#                "Here is some information that might be useful for potential queries: "
-#                "\n\nThe building’s operating hours are as follows:\n"
-#                "- Monday to Friday: 7:00 AM - 9:00 PM\n"
-#                "- Saturday: 7:00 AM - 4:00 PM\n"
-#                "- Sunday and public holidays: closed\n"
-#                "\nThe cafe's opening hours are:\n"
-#                "- Monday to Friday: 8:00 AM - 5:00 PM\n"
-#                "- Saturday: 8:00 AM - 4:00 PM\n"
-#                "\nThe group rooms are located on the first floor on the left side.\n"
-#                "\nHere are some exciting facts about SQUARE:\n"
-#                "- It was designed by architect Sou Fujimoto and financed by the HSG Foundation.\n"
-#                "- SQUARE was constructed in a record time of two years, from November 2019 to November 2021.\n"
-#                "- The building serves as a test environment for innovative teaching and learning formats, featuring a flexible space concept for experimental and cross-generational education.\n"
-#                "- The project 'Open Grid - choices for tomorrow' by Sou Fujimoto is based on the architectural principle of the square, integrating concepts of a station, monastery, and workshop.\n"
-#                "- The total construction costs were CHF 53 million, with around 63% of the services provided by companies from the Eastern Switzerland region.\n"
-#                "- The building’s design resembles a large notebook, providing flexible spaces and walls for testing and applying innovative teaching formats.\n"
-#                "- Its cube-like structure consists of a grid with blocks measuring 10x10x5 meters, with some areas featuring half room heights for additional space and a harmonious silhouette.\n"
-#                "- The facade is made of transparent glass that visually adapts to the seasons, ensuring a healthy indoor climate with daylight and extensive views.\n"
-#                "- The building’s heating and cooling systems are powered by heat pumps, utilizing 65 probes drilled about 200 meters deep, divided into two fields for optimal energy efficiency.\n"
-#                "- A photovoltaic system with a capacity of 67 kW has been installed to cover the building’s energy needs, potentially meeting 50-60% of its annual energy requirement.\n"
-#                "- A total of 6,000 m3 of concrete was used in the construction, including eco-friendly options like Holcim Evopact plus and Holcim Evopact ZERO, which help to reduce carbon emissions by 10%.\n"
-#                "\nIMPORTANT: If a user expresses the intention to book a room, respond exclusively with the following JSON format: {'intent': 'room_booking'}.")
-
-
 
 
 not_available_for_this_slot = False
@@ -135,7 +103,7 @@ class ActionConfirmBooking(Action):
         to = tracker.get_slot("to")
         name = tracker.get_slot("name")
         if von is not None and to is not None and name is not None:
-            dispatcher.utter_message(text=f"Perfect, I booked a room from {von} to {to} for {name}! The room is located on the first floor on the left-hand side. There is a screen in front of the room where you can see your reservation shortly before the start of the time.")
+            dispatcher.utter_message(text=f"Perfect, I booked a room from {von} bis {to} for {name}! The room is located on the first floor on the left-hand side. There is a screen in front of the room where you can see your reservation shortly before the start of the time.")
             global booking_info
             update_booking_info(booking_info = {
                             "name": name,
@@ -188,82 +156,6 @@ class ActionConfirmBooking(Action):
         to = None
         name = None
 
-        # if von is not None and to is not None:
-        #     lookup_table = {
-        #     '7': '07:00:00',
-        #     '7.15': '07:15:00',
-        #     '7.30': '07:30:00',
-        #     '7.45': '07:45:00',
-        #     '8': '08:00:00',
-        #     '8.15': '08:15:00',
-        #     '8.30': '08:30:00',
-        #     '8.45': '08:45:00',
-        #     '9': '09:00:00',
-        #     '9.15': '09:15:00',
-        #     '9.30': '09:30:00',
-        #     '9.45': '09:45:00',
-        #     '10': '10:00:00',
-        #     '10.15': '10:15:00',
-        #     '10.30': '10:30:00',
-        #     '10.45': '10:45:00',
-        #     '11': '11:00:00',
-        #     '11.15': '11:15:00',
-        #     '11.30': '11:30:00',
-        #     '11.45': '11:45:00',
-        #     '12': '12:00:00',
-        #     '12.15': '12:15:00',
-        #     '12.30': '12:30:00',
-        #     '12.45': '12:45:00',
-        #     '1': '13:00:00',
-        #     '1.15': '13:15:00',
-        #     '1.30': '13:30:00',
-        #     '1.45': '13:45:00',
-        #     '2': '14:00:00',
-        #     '2.15': '14:15:00',
-        #     '2.30': '14:30:00',
-        #     '2.45': '14:45:00',
-        #     '3': '15:00:00',
-        #     '3.15': '15:15:00',
-        #     '3.30': '15:30:00',
-        #     '3.45': '15:45:00',
-        #     '4': '16:00:00',
-        #     '4.15': '16:15:00',
-        #     '4.30': '16:30:00',
-        #     '4.45': '16:45:00',
-        #     '5': '17:00:00',
-        #     '5.15': '17:15:00',
-        #     '5.30': '17:30:00',
-        #     '5.45': '17:45:00',
-        #     '6': '18:00:00',
-        #     '13': '13:00:00',
-        #     '13.15': '13:15:00',
-        #     '13.30': '13:30:00',
-        #     '13.45': '13:45:00',
-        #     '14': '14:00:00',
-        #     '14.15': '14:15:00',
-        #     '14.30': '14:30:00',
-        #     '14.45': '14:45:00',
-        #     '15': '15:00:00',
-        #     '15.15': '15:15:00',
-        #     '15.30': '15:30:00',
-        #     '15.45': '15:45:00',
-        #     '16': '16:00:00',
-        #     '16.15': '16:15:00',
-        #     '16.30': '16:30:00',
-        #     '16.45': '16:45:00',
-        #     '17': '17:00:00',
-        #     '17.15': '17:15:00',
-        #     '17.30': '17:30:00',
-        #     '17.45': '17:45:00',
-        #     '18': '18:00:00',
-        #     }
-
-        #     von_t = lookup_table[von]
-        #     to_t = lookup_table[to]
-        #     start_time = datetime.strptime(von_t, '%H:%M:%S').time()
-        #     end_time = datetime.strptime(to_t, '%H:%M:%S').time()
-        #     print(start_time)
-        #     print(end_time)
 
         variable_list = []
         message = "Today we have a free time slot "
@@ -297,8 +189,6 @@ class ActionConfirmBooking(Action):
             to = json_obj['to']
             name = json_obj['name']
             
-            #start_time = datetime.strptime(von, '%H:%M:%S').time()
-            #end_time = datetime.strptime(to, '%H:%M:%S').time()
   
                     
         except json.JSONDecodeError:
@@ -312,89 +202,6 @@ class ActionConfirmBooking(Action):
         if von is not None and to is not None and name is not None:
             return [FollowupAction("action_confirm"), SlotSet("to", to), SlotSet("from", von), SlotSet("name", name)]
 
-        # if von is not None and to is not None:
-        #     if len(available_slots) == 0:
-        #         dispatcher.utter_message(text=f"Unfortunately we have no room left today. Sorry about that. Can I assist you with something else?")
-        #         return [AllSlotsReset(), ActiveLoop(None),FollowupAction('action_listen')]
-
-        #     else:
-        #         for available_start, available_end in available_slots:
-        #             start_minutes = start_time.hour * 60 + start_time.minute
-        #             end_minutes = end_time.hour * 60 + end_time.minute
-    
-        #             # Calculate the difference in minutes
-        #             difference = end_minutes - start_minutes
-
-        #             if available_start <= start_time and end_time <= available_end:
-        #                 dispatcher.utter_message(text=f"I have checked the availability. We have a room from {von} to {to}.")
-        #                 if difference > 120:
-        #                     print(difference)
-        #                     dispatcher.utter_message(text=f"But, you can only book a maximum of 2 hour slots.")
-        #                     return [FollowupAction("utter_ask_from"),SlotSet("to", None), SlotSet("from", None)]
-        #                 else:
-        #                     return [FollowupAction("utter_ask_name"), SlotSet("name", None)]
-        #             else:
-        #                 continue
-
-                    
-        #         not_available_for_this_slot = True
-        #         print("set_not_available_true")
-        #         dispatcher.utter_message(text=f"Sorry, we don't have any rooms available from {von} to {to}.")
-        #         not_available_for_this_slot = False
-        #         return [FollowupAction('action_confirm_possibility'),SlotSet("to", None), SlotSet("from", None), SlotSet("name", None)]
-
-        # else:
-        #     if len(available_slots) == 0:
-        #         dispatcher.utter_message(text=f"Unfortunately we have no room left today. Sorry about that. Can I assist you with something else?")
-        #         return [AllSlotsReset(), ActiveLoop(None),FollowupAction('action_listen')]
-
-        #     elif available_slots[0] == (time(7, 0), time(18, 0)):
-        #         dispatcher.utter_message(text=f"All right, today there are rooms available all day from 7am to 6pm. The maximum booking time is 2 hours.")
-        #         return [FollowupAction("utter_ask_from"), SlotSet("name", None)]
-
-        #     else:
-        #         x = len(available_slots)
-        #         variable_list = []
-        #         message = "Today we have a free time slot "
-    
-        #         for available_start, available_end in available_slots:
-        #             variable_value = f"from {str(available_start)[:-3]} to {str(available_end)[:-3]}"
-        #             # Append the variable value to the list
-        #             variable_list.append(variable_value)
-    
-        #         for i, variable_value in enumerate(variable_list):
-        #             message = message + variable_value + " and "
-    
-        #             print(message[:-4])
-        #         dispatcher.utter_message(text=message[:-4]+ ". The maximum duration for a booking is 2 hours.")
-        #         return [FollowupAction("utter_ask_from"), SlotSet("name", None)]
-
-        
-
-        #     # Perform an action based on the selected action
-        #     if selected_action == 'Action 1' or selected_action == 'Action 2':
-        #         dispatcher.utter_message(text=f"Great, i checked the availability and we have a room from {von} to {to}.")
-        #         message_sent = True
-        #         return [FollowupAction("booking_form")]
-
-        #     else:
-        #         dispatcher.utter_message(text=f"There is no room left from {von} to {to}. There is a time slot from 3 to 4.")
-        #         global flag
-        #         flag = 1
-        #         message_sent = True
-        #         return [SlotSet("from", None), SlotSet("to", None), SlotSet("requested_slot", "from")]
-
-        # # Perform an action based on the selected action
-        # else:
-        #     if selected_action == 'Action 1':
-        #         dispatcher.utter_message(text=f"All right, today there are still free rooms all day from 7 am to 6 pm. The maximum duration for a booking is 2 hours.")
-        #         return [FollowupAction("booking_form")]
-        #     elif selected_action == 'Action 2':
-        #         dispatcher.utter_message(text=f"Today we have left an available room from 2 to 6 pm. You can book a maximum of 2 hours time slot.")
-        #         return [FollowupAction("booking_form")]
-        #     elif selected_action == 'Action 3':
-        #         dispatcher.utter_message(text=f"Unfortunately we have no room left today. Sorry for that. Can I assist you with something else?")
-        #         return [AllSlotsReset(), ActiveLoop(None),FollowupAction('action_listen')]
 
 class ActionChatWithGPT(Action):
 
@@ -461,54 +268,6 @@ class ActionResetSlots(Action):
         return [AllSlotsReset(), ActiveLoop(None), FollowupAction('action_listen')]
 
 
-# class ValidateSimplePizzaForm(FormValidationAction):
-#     def name(self) -> Text:
-#         return "validate_booking_form"
-
-#     def validate_from(
-#         self,
-#         slot_value: Any,
-#         dispatcher: CollectingDispatcher,
-#         tracker: Tracker,
-#         domain: DomainDict,
-#     ) -> Dict[Text, Any]:
-#         """Validate `from` value."""
-
-#         if slot_value.lower() not in ALLOWED_FROM:
-#             dispatcher.utter_message(text=f"You can only book a room from 7am to 8pm")
-#             return {"from": None}
-#         #dispatcher.utter_message(text=f"OK! You want to have a {slot_value} pizza.")
-#         return {"to": slot_value}
-
-#     def validate_to(
-#         self,
-#         slot_value: Any,
-#         dispatcher: CollectingDispatcher,
-#         tracker: Tracker,
-#         domain: DomainDict,
-#     ) -> Dict[Text, Any]:
-#         """Validate `to` value."""
-
-#         if slot_value not in ALLOWED_TO:
-#             dispatcher.utter_message(text=f"You can only book a room from 7am to 8pm")
-#             return {"to": None}
-#         #dispatcher.utter_message(text=f"OK! You want to have a {slot_value} pizza.")
-#         return {"to": slot_value}
-
-
-#     async def run(self, dispatcher, tracker, domain):
-#         von = tracker.get_slot("from")
-#         to = tracker.get_slot("to")
-#         print("Validation")
-#         global not_available_for_this_slot
-       
-#         if von is not None and to is not None:
-#             if not_available_for_this_slot:
-#                 dispatcher.utter_message(text=f"Sorry, we don't have an available room from {von} to {to}.")
-#                 not_available_for_this_slot = False
-#                 return [FollowupAction('action_confirm_possibility'),SlotSet("to", None), SlotSet("from", None)]
-            
-                
 
 
 class ActionCurrentWheather(Action):
@@ -655,78 +414,6 @@ class ActionCurrentWheather(Action):
 
 
 
-# class ActionBusFromDfour(Action):
-
-#     def name(self) -> Text:
-#         return "next_bus_dufour"
- 
-
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-#         current_day_of_week = datetime.now().strftime("%A")
-
-#         # Selecting bus times based on the current day of the week
-#         if current_day_of_week in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]:
-#             times = [
-#                         '7.07', '7.17', '7.27', '7.37', '7.47', '7.57', '8.07', '8.17', '8.27',
-#                         '8.37', '8.47', '8.57', '9.07', '9.17', '9.27', '9.37', '9.47', '9.57',
-#                         '10.07', '10.17', '10.27', '10.37', '10.47', '10.57', '11.07', '11.17',
-#                         '11.27', '11.37', '11.47', '11.57', '12.07', '12.17', '12.27', '12.37',
-#                         '12.47', '12.57', '13.07', '13.17', '13.27', '13.37', '13.47', '13.57',
-#                         '14.07', '14.17', '14.27', '14.37', '14.47', '14.57', '15.07', '15.17',
-#                         '15.27', '15.37', '15.47', '15.57', '16.07', '16.17', '16.27', '16.37',
-#                         '16.47', '16.57', '17.07', '17.17', '17.27', '17.37', '17.47', '17.57',
-#                         '18.07', '18.17', '18.27', '18.37', '18.47', '18.57', '19.07', '19.17',
-#                         '19.25', '19.33', '19.45', '19.53', '20.05', '20.25', '20.45'
-#                     ]
-#         elif current_day_of_week == "Saturday":
-#             #if current day = saturday:
-#             times = [
-#                         '7.05', '7.25', '7.45', '8.05', '8.25', '8.45', '9.13', '9.28', '9.43',
-#                         '9.58', '10.13', '10.28', '10.43', '10.58', '11.13', '11.28', '11.43',
-#                         '11.58', '12.13', '12.28', '12.43', '12.58', '13.13', '13.28', '13.43',
-#                         '13.58', '14.13', '14.28', '14.43', '14.58', '15.13', '15.28', '15.43',
-#                         '15.58'
-#                     ]
-#         else:
-#             # Assuming there are no buses on Sundays and other days
-#             times = []
-
-#         # Current time
-#         current_time = datetime.now().strftime("%H.%M")
-
-#         # Convert the times in the list to datetime objects for comparison
-#         times_datetime = [datetime.strptime(time, "%H.%M") for time in times]
-
-#         # Convert current time to datetime object
-#         current_time_datetime = datetime.strptime(current_time, "%H.%M")
-
-#         # Find the next three buses
-#         next_buses = []
-#         for bus_time in times_datetime:
-#             if bus_time > current_time_datetime:
-#                 next_buses.append(bus_time.strftime("%H.%M"))
-#                 if len(next_buses) == 3:
-#                     break
-
-#         if len(next_buses) == 3:
-#             dispatcher.utter_message(text=f'The next Bus from Uni/Dufourstrasse leaves at {next_buses[0]}. And then at {next_buses[1]} and {next_buses[2]}.')
-
-#         elif len(next_buses) == 2:
-#             dispatcher.utter_message(text=f'The next Bus from Uni/Dufourstrasse leaves at {next_buses[0]}. And then the next would be {next_buses[1]}.')
-        
-#         elif len(next_buses) == 1:
-#             dispatcher.utter_message(text=f'The next Bus from Uni/Dufourstrasse leaves at {next_buses[0]}.' )
-
-#         elif len(next_buses) == 0:
-#             dispatcher.utter_message(text=f'Please chek the SBB when the next bus leaves.' )
-
-        
-#         return [FollowupAction('action_listen')]
-
-
 
 class ActionBusFromDfour(Action):
 
@@ -828,18 +515,6 @@ class ActionBusFromDfour(Action):
 
         dispatcher.utter_message(text=assistant_reply)
 
-
-        # if len(next_buses) == 3:
-        #     dispatcher.utter_message(text=f'The next Bus from Uni/Dufourstrasse leaves at {next_buses[0]}. And then at {next_buses[1]} and {next_buses[2]}.')
-
-        # elif len(next_buses) == 2:
-        #     dispatcher.utter_message(text=f'The next Bus from Uni/Dufourstrasse leaves at {next_buses[0]}. And then the next would be {next_buses[1]}.')
-        
-        # elif len(next_buses) == 1:
-        #     dispatcher.utter_message(text=f'The next Bus from Uni/Dufourstrasse leaves at {next_buses[0]}.' )
-
-        # elif len(next_buses) == 0:
-        #     dispatcher.utter_message(text=f'Please chek the SBB when the next bus leaves.' )
 
         
         return [FollowupAction('action_listen')]          
