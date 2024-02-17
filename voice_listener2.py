@@ -23,7 +23,7 @@ class VoiceListener:
 
     async def listen(self):
         with Microphone() as source:
-            print("Say something...")
+            #print("Say something...")
             self.RECOGNIZER.adjust_for_ambient_noise(source)
 
             while not self.shared_dict['stop_record']:

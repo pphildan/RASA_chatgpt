@@ -28,7 +28,7 @@ empty_thread = openai.beta.threads.create()
 thread_id = empty_thread.id
 asst_id = config['assistant']
 
-def send_text_to_server(text, url="http://192.168.0.103:5000/speak"):
+def send_text_to_server(text, url="http://172.20.10.2:5000/speak"):
     try:
         # Sending the text as a JSON object
         headers = {'Content-Type': 'application/json'}
@@ -133,15 +133,16 @@ if __name__ == '__main__':
             if bot_responses:
                 for response in bot_responses:
                     if 'text' in response:
-                        print("Bot:", "." )
+                        #print("Bot:", "." )
                         pattern = r"【.*$"
                         cleaned_response = re.sub(pattern, '', response['text'])
                         append_to_txt(txt_file_path, "Bot: " + cleaned_response)
-                        response_text = send_text_to_server(cleaned_response)
+                        #response_text = send_text_to_server(cleaned_response)
+                        print("Bot:", cleaned_response)
 
-                        chars = len(cleaned_response)
-                        x = int(chars/25)
-                        time.sleep(x)
+                        #chars = len(cleaned_response)
+                        #x = int(chars/25)
+                        #time.sleep(x)
 
           
 
